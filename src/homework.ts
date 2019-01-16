@@ -1,9 +1,7 @@
 //Task 1
 abstract class Car {
-
-
-	constructor(protected mileage: number, protected fuel: number) {
-	}
+	protected mileage: number;
+	protected fuel: number;
 
 	abstract drive(value: number): any;
 
@@ -12,39 +10,45 @@ abstract class Car {
 
 //Task 2
 class Honda extends Car {
-	constructor(protected mileage: number, protected fuel: number) {
-		super(mileage, fuel);
+	protected mileage: number;
+	protected fuel: number;
+	constructor(mileage: number, fuel: number) {
+		super();
+		this.mileage = mileage;
+		this.fuel = fuel;
 	}
-
+	/**
+	 * 
+	 * @param value - количество километров
+	 * Принимает количество километров и обновляет свойства mileage и fuel
+	 */
 	drive(value: number): any {
-		if (this.fuel <= 0) {
-			console.log('Your have to go to gaz station. Your fuel = 0');
-		}
+		if (!value) return console.log("Insert a number");
 
-		if (!value) {
-			return console.log("Insert a number");
-		} else {
-			this.mileage += value;
-			this.fuel -= value;
+		this.mileage += value;
+		this.fuel -= value;
 
-			return this.mileage;
-		}
+		if (this.fuel <= 0)	console.log('Your have to go to gaz station. Your fuel = 0');
 
-
+		return this.mileage;
 	}
-
+	/**
+	 * 
+	 * @param fuelValue - количество топлива
+	 * Принимает количество топлива и обновляет его
+	 */
 	refuel(fuelValue: number): any {
-		if (!fuelValue) {
-			return console.log("Insert a number");
-		} else {
-			return this.fuel += fuelValue;
-
-		}
+		if (!fuelValue) return console.log("Insert a number");
+		return this.fuel += fuelValue;
 	}
 
 	//Task 3
-	public get carValues(): any {
-		return [this.mileage, this.fuel];
+	public get carMileage(): number {
+		return this.mileage;
+	}
+
+	public get carFuel(): number {
+		return this.fuel;
 	}
 }
 
